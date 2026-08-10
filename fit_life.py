@@ -1,5 +1,6 @@
 # Проект FitLife - MVP версия 1.0
 
+MLITER_PER_LITER = 1000 # Не сочтите за грубость но помоему это очевидно
 WATER_PER_KG = 30
 
 # Сбор данных пользователя
@@ -10,12 +11,14 @@ user_heiht = float(input("Введите ваш рост (в метрах) (на
 
 # Расчёт рекомендованных значений
 bmi = round(user_weight / (user_heiht ** 2), 1)
-water_ml = user_weight * WATER_PER_KG
-water_l = water_ml / 1000
+water_ml = user_weight * WATER_PER_KG # Зачем нужна эта переменная? Или она не занимает место в памяти? т.к. ссылка на экз класса инт?
+water_l = water_ml / MLITER_PER_LITER
 
 # Определение необходимого слова для числа возраста (год[а]/лет)
-age_ending = 'г' if (user_age % 10 in [1, 2, 3, 4]
-                     and user_age % 100 not in [11, 12, 13, 14]) else 'л'
+is_one_to_four = user_age % 10 in [1, 2, 3, 4]
+is_exception = user_age % 100 in [11, 12, 13, 14]
+
+age_ending = 'г' if (is_one_to_four and not is_exception) else 'л'
 
 # Вывод отчёта о пользователе
 print('\n', '-' * 42, sep='')
