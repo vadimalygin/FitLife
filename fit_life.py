@@ -1,17 +1,46 @@
 # Проект FitLife - MVP версия 1.0
 
-MLITER_PER_LITER = 1000 # Не сочтите за грубость но помоему это очевидно
-WATER_PER_KG = 30
+# Константы для перевода единиц измерения
+MLITER_PER_LITER = 1000 
+WATER_PER_KG = 30 
 
 # Сбор данных пользователя
 user_name = input("\nДобрый день! Как к вам обращаться?: ").title()
-user_age = int(input("Введите ваш возраст: "))
-user_weight = float(input("Введите ваш вес (в кг): "))
-user_heiht = float(input("Введите ваш рост (в метрах) (например 1.75): "))
+
+# Дожидаемся пока пользователь введёт все данные корректно
+has_no_age = True
+has_no_weight = True
+has_no_height = True
+
+while has_no_age or has_no_weight or has_no_height:
+    if has_no_age:
+        try:
+            user_age = int(input("Введите ваш возраст: "))
+            has_no_age = False
+        except Exception as e:
+            print("Некорректный формат ввода. Попробуйте ещё раз.")
+            continue
+
+    if has_no_weight:
+        try:
+            user_weight = float(input("Введите ваш вес (в кг): "))
+            has_no_weight = False
+        except Exception as e:
+            print("Некорректный формат ввода. Попробуйте ещё раз.")
+            continue
+
+
+    if has_no_height:
+        try:
+            user_heiht = float(input("Введите ваш рост в м. (например 1.75): "))
+            has_no_height = False
+        except Exception as e:
+            print("Некорректный формат ввода. Попробуйте ещё раз.")
+            continue
 
 # Расчёт рекомендованных значений
 bmi = round(user_weight / (user_heiht ** 2), 1)
-water_ml = user_weight * WATER_PER_KG # Зачем нужна эта переменная? Или она не занимает место в памяти? т.к. ссылка на экз класса инт?
+water_ml = user_weight * WATER_PER_KG 
 water_l = water_ml / MLITER_PER_LITER
 
 # Определение необходимого слова для числа возраста (год[а]/лет)
