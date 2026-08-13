@@ -13,7 +13,7 @@ def get_age() -> tuple[int, bool]:
         user_age = int(input("Введите ваш возраст: "))
         has_no_age = False
         return user_age, has_no_age
-    except Exception:
+    except ValueError:
         print("Некорректный формат ввода. Попробуйте ещё раз.")
         raise
 
@@ -24,7 +24,7 @@ def get_weight() -> tuple[float, bool]:
         user_weight = float(input("Введите ваш вес (в кг): "))
         has_no_weight = False
         return user_weight, has_no_weight
-    except Exception:
+    except ValueError:
         print("Некорректный формат ввода. Попробуйте ещё раз.")
         raise
 
@@ -35,7 +35,7 @@ def get_height() -> tuple[float, bool]:
         user_height = float(input("Введите ваш рост в м.(например 1.75): "))
         has_no_height = False
         return user_height, has_no_height
-    except Exception:
+    except ValueError:
         print("Некорректный формат ввода. Попробуйте ещё раз.")
         raise
 
@@ -58,7 +58,7 @@ while has_no_age or has_no_weight or has_no_height:
 
         if has_no_height:
             user_height, has_no_height = get_height()
-    except Exception:
+    except ValueError:
         continue
 
 # Расчёт рекомендованных значений
